@@ -1,8 +1,6 @@
 package com.haider.myfancypdfinvoices.web;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.haider.myfancypdfinvoices.context.Application;
-import com.haider.myfancypdfinvoices.service.InvoiceService;
 import com.haider.myfancypdfinvoices.model.Invoice;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

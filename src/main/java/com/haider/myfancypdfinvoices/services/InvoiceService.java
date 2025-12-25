@@ -1,4 +1,4 @@
-package com.haider.myfancypdfinvoices.service;
+package com.haider.myfancypdfinvoices.services;
 
 import com.haider.myfancypdfinvoices.model.Invoice;
 
