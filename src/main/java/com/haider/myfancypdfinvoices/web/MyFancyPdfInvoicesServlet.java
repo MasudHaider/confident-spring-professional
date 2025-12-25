@@ -1,6 +1,7 @@
 package com.haider.myfancypdfinvoices.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.haider.myfancypdfinvoices.context.Application;
 import com.haider.myfancypdfinvoices.service.InvoiceService;
 import com.haider.myfancypdfinvoices.model.Invoice;
 import jakarta.servlet.http.HttpServlet;
@@ -11,8 +12,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class MyFancyPdfInvoicesServlet extends HttpServlet {
-    private InvoiceService invoiceService = new InvoiceService();
-    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -29,8 +28,8 @@ public class MyFancyPdfInvoicesServlet extends HttpServlet {
         }
         else if (request.getRequestURI().equalsIgnoreCase("/invoices")){
             response.setContentType("application/json; charset=UTF-8");
-            List<Invoice> invoices = invoiceService.findAll();
-            response.getWriter().print(objectMapper.writeValueAsString(invoices));
+            List<Invoice> invoices = Application.invoiceService.findAll();
+            response.getWriter().print(Application.objectMapper.writeValueAsString(invoices));
         }
     }
 
@@ -41,14 +40,15 @@ public class MyFancyPdfInvoicesServlet extends HttpServlet {
             String userId = request.getParameter("user_id");
             Integer amount = Integer.valueOf(request.getParameter("amount"));
 
-            Invoice invoice = invoiceService.create(userId, amount);
+            Invoice invoice = Application.invoiceService.create(userId, amount);
 
             response.setContentType("application/json; charset=UTF-8");
 
-            String json = new ObjectMapper().writeValueAsString(invoice);
+            String json = Application.objectMapper.writeValueAsString(invoice);
 
             response.getWriter().print(json);
-        } else {
+        }
+        else {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
 
