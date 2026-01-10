@@ -13,9 +13,11 @@ public class Invoice {
     @JsonProperty("pdf_url")
     private String pdfUrl;
 
+    @JsonProperty("amount")
     private Integer amount;
 
-    public Invoice() {
+    public Invoice(){
+
     }
 
     public Invoice(String userId, Integer amount, String pdfUrl) {
